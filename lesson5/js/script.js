@@ -26,43 +26,22 @@ const movieDB = {
 
 movieDB.movies.sort();
 
-//1 variant
-// const promoAdv = document.querySelectorAll('.promo__adv');
-// promoAdv.forEach(item=>{
-// item.remove();
-// });
+const promoAdv = document.querySelectorAll('.promo__adv img'),
+    promoBg = document.querySelector('.promo__bg'),
+    filmList = document.querySelector(".promo__interactive-list");
 
-//2 varian
-const promoAdv = document.querySelectorAll('.promo__adv img');
+//Удаляем рекламу
 promoAdv.forEach(img => {
     img.remove();
 });
 
+//Меняем жанр
+promoBg.querySelector('.promo__genre').innerHTML = "драма";
 
-
-//3 varian
-// const promoAdv = document.getElementsByClassName('promo__adv');
-// for (let index = 0; index < promoAdv.length; index++) {
-//     promoAdv[index].remove();
-// }
-
-
-const genre = document.querySelector('.promo__genre');
-genre.innerHTML = "драма";
-
-const promoBg = document.querySelector('.promo__bg');
+//Меняем бэк
 promoBg.style.cssText = 'background-image:url(./img/bg.jpg)';
-// promoBg.style.background = 'url(./img/bg.jpg)';
 
-//1 variant
-// const filmList = document.querySelectorAll(".promo__interactive-item");
-// for (let index = 0; index < filmList.length; index++) {
-//     filmList[index].innerHTML = `${index+1}. ${movieDB.movies[index]}`;
-
-// }
-
-//2 varian
-const filmList = document.querySelector(".promo__interactive-list");
+//Формируем список фильмов из массива
 filmList.innerHTML = "";
 movieDB.movies.forEach((film, i) => {
     filmList.innerHTML += `
