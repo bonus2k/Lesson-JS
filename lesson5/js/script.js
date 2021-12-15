@@ -54,12 +54,17 @@ addItem.addEventListener("submit", event => {
 });
 
 //Удаляем рекламу
-promoAdv.forEach(img => {
-    img.remove();
-});
+const deleteAdv = () => {
+    promoAdv.forEach(img => {
+        img.remove();
+    });
+}
 
 //Меняем жанр
-promoBg.querySelector('.promo__genre').innerHTML = "драма";
+const selectGenre = (str) => {
+    promoBg.querySelector('.promo__genre').innerHTML = str;
+}
+
 
 //Меняем бэк
 promoBg.style.cssText = 'background-image:url(./img/bg.jpg)';
@@ -67,7 +72,7 @@ promoBg.style.cssText = 'background-image:url(./img/bg.jpg)';
 //Формируем список фильмов из массива
 createMoveList();
 
-function createMoveList( ) {
+function createMoveList() {
     movieDB.movies.sort((a, b) => {
         return a.localeCompare(b);
     });
@@ -86,5 +91,7 @@ function createMoveList( ) {
             createMoveList();
         });
     });
+    deleteAdv();
+    selectGenre("драма");
 }
 
