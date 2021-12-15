@@ -27,7 +27,6 @@ const movieDB = {
     ]
 };
 
-
 const promoAdv = document.querySelectorAll('.promo__adv img'),
     promoBg = document.querySelector('.promo__bg'),
     filmList = document.querySelector(".promo__interactive-list"),
@@ -36,22 +35,24 @@ const promoAdv = document.querySelectorAll('.promo__adv img'),
     addInput = addItem.querySelector(".adding__input"),
     check = addItem.querySelector("input[type='checkbox']");
 
-addItem.addEventListener("submit", event => {
-    event.preventDefault();
-    let text = addInput.value;
-    if (text) {
-        if (text.length > 21) {
-            text = (`${text.substr(0, 22)}...`);
-        }
-        movieDB.movies.push(text);
-        createMoveList();
+function addMovie() {
+    addItem.addEventListener("submit", event => {
+        event.preventDefault();
+        let text = addInput.value;
+        if (text) {
+            if (text.length > 21) {
+                text = (`${text.substr(0, 22)}...`);
+            }
+            movieDB.movies.push(text);
+            createMoveList();
 
-        if (check.checked) {
-            console.log("Добавляем любимый фильм");
+            if (check.checked) {
+                console.log("Добавляем любимый фильм");
+            }
         }
-    }
-    event.target.reset();
-});
+        event.target.reset();
+    });
+}
 
 //Удаляем рекламу
 promoAdv.forEach(img => {
@@ -62,12 +63,14 @@ promoAdv.forEach(img => {
 promoBg.querySelector('.promo__genre').innerHTML = "драма";
 
 //Меняем бэк
-promoBg.style.cssText = 'background-image:url(./img/bg.jpg)';
+const selectBack=(path)=> {
+    promoBg.style.cssText = path;
+};
 
 //Формируем список фильмов из массива
 createMoveList();
 
-function createMoveList( ) {
+function createMoveList() {
     movieDB.movies.sort((a, b) => {
         return a.localeCompare(b);
     });
@@ -84,7 +87,12 @@ function createMoveList( ) {
         btn.addEventListener('click', event => {
             movieDB.movies.splice(i, 1);
             createMoveList();
+            console.log(movieDB.movies);
         });
     });
+
+    addMovie();
+    selectBack('background-image:url(./img/bg.jpg)');
+
 }
 
