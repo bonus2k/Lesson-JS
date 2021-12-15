@@ -55,12 +55,17 @@ function addMovie() {
 }
 
 //Удаляем рекламу
-promoAdv.forEach(img => {
-    img.remove();
-});
+const deleteAdv = () => {
+    promoAdv.forEach(img => {
+        img.remove();
+    });
+}
 
 //Меняем жанр
-promoBg.querySelector('.promo__genre').innerHTML = "драма";
+const selectGenre = (str) => {
+    promoBg.querySelector('.promo__genre').innerHTML = str;
+};
+
 
 //Меняем бэк
 const selectBack=(path)=> {
@@ -87,12 +92,12 @@ function createMoveList() {
         btn.addEventListener('click', event => {
             movieDB.movies.splice(i, 1);
             createMoveList();
-            console.log(movieDB.movies);
         });
     });
 
     addMovie();
     selectBack('background-image:url(./img/bg.jpg)');
-
+    deleteAdv();
+    selectGenre("драма");
 }
 
